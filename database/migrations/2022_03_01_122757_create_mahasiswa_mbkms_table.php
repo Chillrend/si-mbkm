@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('mahasiswa_mbkms', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('model_mbkm_id');
+            $table->string('nip_dospem');
+            $table->string('lokasi_mbkm');
+            $table->string('alamat_mbkm');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('model_mbkm_id')->references('id')->on('modelmbkms');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('mahasiswa_mbkms');
+    }
+};
