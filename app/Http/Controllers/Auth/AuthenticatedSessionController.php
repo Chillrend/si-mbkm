@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,26 @@ class AuthenticatedSessionController extends Controller
     }
 
     public function sso_cb(){
-        return response()->json(Socialite::driver('pnj')->user());
+        $pnj_user = Socialite::driver('pnj')->user();
+
+        $user = User::where('ident', $pnj_user['ident'])->first();
+
+        if($user){
+            Auth::login($user);
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }else{
+            $new_user = new User();
+
+            $new_user->name = $pnj_user['name'];
+            $new_user->jurusan = $pnj_user['department_and_level'][0]['department'];
+            $new_user->email = $pnj_user['email'];
+            $new_user->ident = $pnj_user['ident'];
+
+            $new_user->save();
+
+            Auth::login($new_user);
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
     }
 
     /**
