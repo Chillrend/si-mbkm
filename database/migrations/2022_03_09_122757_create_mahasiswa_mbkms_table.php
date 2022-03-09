@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('model_mbkm_id');
             $table->unsignedBigInteger('prodi_id');
             $table->string('nip_dospem');
+            $table->string('nama_dospem');
             $table->string('lokasi_mbkm');
             $table->string('alamat_mbkm');
             $table->timestamps();
