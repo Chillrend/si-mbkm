@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('model_mbkm_id');
+            $table->unsignedBigInteger('prodi_id');
             $table->string('nip_dospem');
             $table->string('lokasi_mbkm');
             $table->string('alamat_mbkm');
@@ -24,6 +25,7 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('model_mbkm_id')->references('id')->on('modelmbkms');
+            $table->foreign('prodi_id')->references('id')->on('prodis');
         });
     }
 
