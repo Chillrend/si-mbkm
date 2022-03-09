@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\jurusan;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class AuthenticatedSessionController extends Controller
             $new_user = new User();
 
             $new_user->name = $pnj_user['name'];
-            $new_user->jurusan = $pnj_user['department_and_level'][0]['department'];
+            $new_user->jurusan_id = self::return_jurusan_id($pnj_user['department_and_level'][0]['department']);
             $new_user->email = $pnj_user['email'];
             $new_user->ident = $pnj_user['ident'];
 
@@ -83,5 +84,15 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public static function return_jurusan_id(string $jurusan_string){
+        $jurusan_res = jurusan::where('jurusan_name', $jurusan_string)->first();
+
+        if($jurusan_res){
+            return $jurusan_res->id;
+        }else{
+            return null;
+        }
     }
 }
