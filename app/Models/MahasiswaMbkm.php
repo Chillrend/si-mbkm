@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class mahasiswa_mbkm extends Model
+class MahasiswaMbkm extends Model
 {
     use HasFactory;
+
+    protected $table = 'mahasiswa_mbkms';
 
     protected $fillable = [
         'user_id',
@@ -16,15 +18,16 @@ class mahasiswa_mbkm extends Model
         'nip_dospem',
         'nama_dospem',
         'lokasi_mbkm',
-        'alamat_mbkm'
+        'alamat_mbkm',
+        'deskripsi_mbkm'
     ];
 
-    public function getJurusan(){
-        return $this->hasOne(prodi::class);
+    public function getProdi(){
+        return $this->hasOne(Prodi::class);
     }
 
     public function getModelMbkm(){
-        return $this->hasOne(modelmbkm::class);
+        return $this->hasOne(ModelMbkm::class);
     }
 
     public function getMhsw(){

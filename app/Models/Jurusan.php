@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class modelmbkm extends Model
+class Jurusan extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'jurusan_name',
+    ];
 }

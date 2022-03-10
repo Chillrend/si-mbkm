@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
 
     public function getMhsJurusan(){
-        $this->hasOne(jurusan::class);
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MahasiswaMBKMController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [MahasiswaMBKMController::class, 'render_dashboard'])
+    ->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
