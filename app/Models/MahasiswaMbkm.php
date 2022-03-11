@@ -11,7 +11,12 @@ class MahasiswaMbkm extends Model
 
     protected $table = 'mahasiswa_mbkms';
 
+    protected $casts = [
+        'id' => 'string'
+    ];
+
     protected $fillable = [
+        'id',
         'user_id',
         'model_mbkm_id',
         'prodi_id',
@@ -23,14 +28,14 @@ class MahasiswaMbkm extends Model
     ];
 
     public function getProdi(){
-        return $this->hasOne(Prodi::class);
+        return $this->belongsTo(Prodi::class, 'prodi_id');
     }
 
     public function getModelMbkm(){
-        return $this->hasOne(ModelMbkm::class);
+        return $this->belongsTo(ModelMbkm::class, 'model_mbkm_id');
     }
 
     public function getMhsw(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

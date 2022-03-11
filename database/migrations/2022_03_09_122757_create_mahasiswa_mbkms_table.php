@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('nama_dospem');
             $table->string('lokasi_mbkm');
             $table->string('alamat_mbkm');
-            $table->string('deskripsi_mbkm');
+            $table->string('deskripsi_mbkm')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

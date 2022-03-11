@@ -22,6 +22,6 @@ class Prodi extends Model
     ];
 
     public function getJurusan(){
-        return $this->hasOne(Jurusan::class);
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
     }
 }

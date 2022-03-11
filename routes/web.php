@@ -15,10 +15,15 @@ use App\Http\Controllers\MahasiswaMBKMController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to('/mbkm');
 });
 
-Route::get('/dashboard', [MahasiswaMBKMController::class, 'render_dashboard'])
-    ->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/mbkm', [MahasiswaMBKMController::class, 'render_dashboard'])->name('mbkm.dashboard');
+    Route::get('/mbkm/daftar', [MahasiswaMBKMController::class, 'render_form'])->name('mbkm.daftar');
+    Route::post('/mbkm/daftar', [MahasiswaMBKMController::class, 'store'])->name('mbkm.store');
+});
+
+Route::get('/mbkm/noreg/{id}', [MahasiswaMBKMController::class, 'render_noreg'])->name('mbkm.noreg');
 
 require __DIR__.'/auth.php';
