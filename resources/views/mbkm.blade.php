@@ -15,7 +15,7 @@
                             Status Pendaftaran Kegiatan MBKM
                         </h6>
                         @if(!isset($from_noreg))
-                        <a class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+                        <a href="{{url("/mbkm/daftar")}}" class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
                             Edit Data
                         </a>
                         @endif

@@ -188,7 +188,6 @@
                 }));
 
             jurusan_selector.addEventListener('change', function (event){
-                console.log('change fired..')
                 removeOptions(prodi_selector);
                 add_select_option(prodi_selector, null, "Loading...");
                 fetch('{!! url('/api/prodi/by-jur/') !!}/' + jurusan_selector.value)
