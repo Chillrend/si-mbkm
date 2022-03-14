@@ -54,7 +54,7 @@ class MahasiswaMBKMController extends Controller
         $mhsw_mbkm_exist = true;
         $mhsw_mbkm = MahasiswaMbkm::where('id', $id)->first();
 
-        return view('mbkm', [
+        return view('mbkm_guest', [
             'mhsw_mbkm_exist' => $mhsw_mbkm_exist,
             'mhsw_mbkm' => $mhsw_mbkm,
             'from_noreg' => $from_noreg
@@ -84,7 +84,7 @@ class MahasiswaMBKMController extends Controller
             $mhsw_mbkm->fill($data);
         }
         $mhsw_mbkm->save();
-        return response()->json($mhsw_mbkm);
+        return redirect()->to('/mbkm')->with('success', true);
     }
 
     public function getAllProdiWithinJurusan(int $jurusan_id){
