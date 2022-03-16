@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\jurusan;
+use App\Models\Jurusan;
 use App\Models\MahasiswaMbkm;
 use App\Models\ModelMbkm;
 use App\Models\Prodi;
