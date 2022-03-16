@@ -87,7 +87,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     public static function return_jurusan_id(string $jurusan_string){
-        $jurusan_res = jurusan::where('jurusan_name', $jurusan_string)->first();
+        $jurusan_res = Jurusan::where('jurusan_name', $jurusan_string)->first();
 
         if($jurusan_res){
             return $jurusan_res->id;

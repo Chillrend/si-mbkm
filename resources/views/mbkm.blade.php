@@ -30,9 +30,11 @@
     @endif
 
     <x-slot name="script">
+        @if($mhsw_mbkm_exist)
         <script>
             let url = "{{url('/mbkm/noreg/') . $mhsw_mbkm->id}}";
         </script>
+        @endif
         <script src="{{url('/js/qr.js')}}"></script>
         <script src="{{url('/js/mbkm.js')}}"></script>
     </x-slot>
