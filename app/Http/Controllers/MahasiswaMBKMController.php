@@ -65,6 +65,9 @@ class MahasiswaMBKMController extends Controller
         $request->validate([
             'model_mbkm_id' => 'numeric|required',
             'prodi_id' => 'numeric|required',
+            'angkatan' => 'numeric|required|gte:2017',
+            'semester' => 'numeric|required|gte:1|lte:8',
+            'durasi' => 'numeric|required|gte:1|lte:12',
             'nip_dospem' => 'numeric|required',
             'nama_dospem' => 'string|required',
             'lokasi_mbkm' => 'string|required',

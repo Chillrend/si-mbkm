@@ -44,7 +44,7 @@
                                                     @endforeach
                                                 </select>
                                                 @error('jurusan')
-                                                <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
+                                                <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                             <div class="w-full flex flex-col mb-3">
@@ -55,12 +55,34 @@
                                                     required="required" name="prodi_id" id="prodi_id">
                                                 </select>
                                                 @error('prodi_id')
-                                                <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
+                                                <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="mb-3 space-y-2 w-full text-xs">
-                                            <div class="w-full flex flex-col mb-3">
+                                        <div class="md:flex flex-row md:space-x-4 w-full text-xs">
+                                            <div class="mb-3 space-y-2 w-full text-xs">
+                                                <label class="font-semibold text-gray-600 py-2">Angkatan<abbr
+                                                        title="required">*</abbr></label>
+                                                <input placeholder="e.g 2017"
+                                                       class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                                                       required="required" type="number" maxlength="4" min="2017" id="angkatan" name="angkatan" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->angkatan}}@endif">
+                                                @error('angkatan')
+                                                <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3 space-y-2 w-full text-xs">
+                                                <label class="font-semibold text-gray-600 py-2">Semester <abbr
+                                                        title="required">*</abbr></label>
+                                                <input placeholder="e.g 6"
+                                                       class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                                                       required="required" type="number" min="1" max="8" id="semester" name="semester" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->semester}}@endif">
+                                                @error('semester')
+                                                <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="md:flex flex-row md:space-x-4 w-full text-xs">
+                                            <div class="mb-3 space-y-2 w-full text-xs">
                                                 <label class="font-semibold text-gray-600 py-2">Model Kegiatan MBKM
                                                     <abbr title="required">*</abbr></label>
                                                 <select
@@ -71,7 +93,17 @@
                                                     @endforeach
                                                 </select>
                                                 @error('model_mbkm_id')
-                                                <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
+                                                <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3 space-y-2 w-full text-xs">
+                                                <label class="font-semibold text-gray-600 py-2">Durasi (Bulan) <abbr
+                                                        title="required">*</abbr></label>
+                                                <input placeholder="e.g 6"
+                                                       class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                                                       required="required" type="number" min="1" max="6" id="durasi" name="durasi" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->durasi}}@endif">
+                                                @error('durasi')
+                                                <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                         </div>
@@ -81,10 +113,10 @@
                                                     Yang Akan Diajukan <abbr title="required">*</abbr></label>
                                                 <input placeholder="NIP Dospem"
                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                       required="required" type="number" name="nip_dospem" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->nip_dospem}}@else {{old('nip_dospem')}}@endif"
+                                                       required="required" type="number" name="nip_dospem" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->nip_dospem}}@endif"
                                                        id="nip_dospem">
                                                 @error('nip_dospem')
-                                                <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
+                                                <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                             <div class="w-full flex flex-col mb-3">
@@ -95,7 +127,7 @@
                                                        required="required" type="text" name="nama_dospem" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->nama_dospem}}@else {{old('nama_dospem')}}@endif"
                                                        id="nama_dospem">
                                                 @error('nama_dospem')
-                                                <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
+                                                <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                         </div>
@@ -103,9 +135,9 @@
                                             <label class="font-semibold text-gray-600 py-2">Lokasi Kegiatan MBKM <abbr
                                                     title="required">*</abbr></label>
                                             <input
-                                                placeholder="Lokasi Kegiatan MBKM (e.g Desa Harapan Jaya, PT. XYZ Main Office, Kantor PMI Cabang Depok)"
+                                                placeholder="Tempat Kegiatan MBKM (e.g Desa Harapan Jaya, PT. XYZ, Kantor PMI Cabang Depok)"
                                                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                required="required" type="text" name="lokasi_mbkm" id="lokasi_mbkm" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->lokasi_mbkm}}@else {{old('lokasi_mbkm')}}@endif">
+                                                required="required" type="text" name="lokasi_mbkm" id="lokasi_mbkm" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->lokasi_mbkm}}@endif">
                                             @error('lokasi_mbkm')
                                             <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
                                             @enderror
@@ -116,20 +148,20 @@
                                             <input
                                                 placeholder="Alamat Lokasi Kegiatan MBKM (e.g Jl. DR. GA Siwabessy No. 18...)"
                                                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                required="required" type="text" name="alamat_mbkm" id="alamat_mbkm" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->alamat_mbkm}}@else {{old('alamat_mbkm')}}@endif">
+                                                required="required" type="text" name="alamat_mbkm" id="alamat_mbkm" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->alamat_mbkm}}@endif">
                                             @error('alamat_mbkm')
-                                            <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
+                                            <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                             @enderror
                                         </div>
                                         <div class="flex-auto w-full mb-3 text-xs space-y-2">
-                                            <label class="font-semibold text-gray-600 py-2">Deskripsi Kegiatan
+                                            <label class="font-semibold text-gray-600 py-2">Deskripsi / Lingkup Kegiatan
                                                 MBKM</label>
                                             <textarea name="deskripsi_mbkm" id="deskripsi_mbkm"
                                                       class="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
                                                       placeholder="Ketik detail kegiatan yang akan dilakukan pada saat kegiatan MBKM (e.g Mengajar pelajaran xyz di SMKN 1 Kota XYZ..)"
-                                                      spellcheck="false">@if($mhsw_mbkm_exist){{$mhsw_mbkm->deskripsi_mbkm}}@else {{old('deskripsi_mbkm')}}@endif</textarea>
+                                                      spellcheck="false">@if($mhsw_mbkm_exist){{$mhsw_mbkm->deskripsi_mbkm}}@endif</textarea>
                                             @error('deskripsi_mbkm')
-                                            <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
+                                            <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                             @enderror
                                         </div>
                                         <p class="text-red-500 text-right my-3">Kolom diperlukan ditandai dengan simbol

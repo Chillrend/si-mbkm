@@ -34,8 +34,9 @@
         <script>
             let url = "{{url('/mbkm/noreg/') . $mhsw_mbkm->id}}";
         </script>
-        @endif
+
         <script src="{{url('/js/qr.js')}}"></script>
         <script src="{{url('/js/mbkm.js')}}"></script>
+        @endif
     </x-slot>
 </x-app-layout>

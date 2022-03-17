@@ -18,6 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('model_mbkm_id');
             $table->unsignedBigInteger('prodi_id');
+            $table->integer('angkatan');
+            $table->integer('semester');
+            $table->integer('durasi');
             $table->string('nip_dospem');
             $table->string('nama_dospem');
             $table->string('lokasi_mbkm');
