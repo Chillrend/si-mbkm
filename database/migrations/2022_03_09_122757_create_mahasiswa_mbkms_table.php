@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('mahasiswa_mbkms', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('dosbing_mbkm_id')->nullable();
+            $table->unsignedBigInteger('pembimbing_mbkm_id')->nullable();
             $table->unsignedBigInteger('model_mbkm_id');
             $table->unsignedBigInteger('prodi_id');
             $table->integer('angkatan');
@@ -29,6 +31,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('dosbing_mbkm_id')->references('id')->on('users');
+            $table->foreign('pembimbing_mbkm_id')->references('id')->on('users');
             $table->foreign('model_mbkm_id')->references('id')->on('modelmbkms');
             $table->foreign('prodi_id')->references('id')->on('prodis');
         });
