@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/mbkm', [MahasiswaMBKMController::class, 'render_dashboard'])->name('mbkm.dashboard');
     Route::get('/mbkm/daftar', [MahasiswaMBKMController::class, 'render_form'])->name('mbkm.daftar');
     Route::post('/mbkm/daftar', [MahasiswaMBKMController::class, 'store'])->name('mbkm.store');
+    Route::post('/mbkm/approve', [MahasiswaMBKMController::class, 'approve'])->name('mbkm.approve');
 });
 
 Route::get('/mbkm/noreg/{id}', [MahasiswaMBKMController::class, 'render_noreg'])->name('mbkm.noreg');

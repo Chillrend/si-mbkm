@@ -61,6 +61,14 @@ class MahasiswaMBKMController extends Controller
         ]);
     }
 
+    public function approve(Request $request){
+        $mhsw_mbkm = MahasiswaMbkm::where('id', $request->post('id'))->first();
+        $mhsw_mbkm->setApproved($request->get('approve'));
+        dd($mhsw_mbkm);
+
+        return redirect()->back()->with('success', 'Pengajuan MBKM ini telah berhasil disetujui');
+    }
+
     public function store(Request $request){
         $request->validate([
             'model_mbkm_id' => 'numeric|required',
@@ -90,7 +98,7 @@ class MahasiswaMBKMController extends Controller
         return redirect()->to('/mbkm')->with('success', true);
     }
 
-    public function getAllProdiWithinJurusan(int $jurusan_id){
+    public static function getAllProdiWithinJurusan(int $jurusan_id){
         return Prodi::where('jurusan_id', $jurusan_id)->get();
     }
 }

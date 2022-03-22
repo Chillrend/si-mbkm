@@ -29,7 +29,8 @@ class MahasiswaMbkm extends Model
         'nama_dospem',
         'lokasi_mbkm',
         'alamat_mbkm',
-        'deskripsi_mbkm'
+        'deskripsi_mbkm',
+        'approved'
     ];
 
     public function getProdi(){
@@ -50,5 +51,10 @@ class MahasiswaMbkm extends Model
 
     public function getPembimbing(){
         return $this->belongsTo(User::class, 'pembimbing_mbkm_id');
+    }
+
+    public function setApproved(bool $boolean = true){
+        $this->approved = $boolean;
+        $this->save();
     }
 }
