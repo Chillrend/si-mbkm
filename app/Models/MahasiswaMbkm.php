@@ -18,6 +18,8 @@ class MahasiswaMbkm extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'dosbing_mbkm_id',
+        'pembimbing_mbkm_id',
         'model_mbkm_id',
         'prodi_id',
         'angkatan',
@@ -40,5 +42,13 @@ class MahasiswaMbkm extends Model
 
     public function getMhsw(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getDosbing(){
+        return $this->belongsTo(User::class, 'dosbing_mbkm_id');
+    }
+
+    public function getPembimbing(){
+        return $this->belongsTo(User::class, 'pembimbing_mbkm_id');
     }
 }

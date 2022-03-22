@@ -47,6 +47,17 @@ class AuthenticatedSessionController extends Controller
             $new_user->email = $pnj_user['email'];
             $new_user->ident = $pnj_user['ident'];
 
+            switch ($pnj_user['department_and_level'][0]['access_level_name']){
+                case 'Admin':
+                    $new_user->assignRole('Super Admin');
+                    break;
+                case 'Dosen' :
+                    $new_user->assignRole('dosen');
+                    break;
+                default :
+                    $new_user->assignRole('mhsw');
+            }
+
             $new_user->save();
 
             Auth::login($new_user);

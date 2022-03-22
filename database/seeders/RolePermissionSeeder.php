@@ -20,18 +20,23 @@ class RolePermissionSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         Permission::create(['name' => 'mhsw.mbkm']);
+        Permission::create(['name' => 'mhsw.*']);
         Permission::create(['name' => 'dosen.mbkm']);
         Permission::create(['name' => 'dosen.create_pembimbing_user']);
+        Permission::create(['name' => 'dosen.*']);
         Permission::create(['name' => 'pembimbing.mbkm']);
+        Permission::create(['name' => 'pembimbing.*']);
 
         $mhsw = Role::create(['name' => 'mhsw']);
-        $mhsw->givePermissionTo('mhsw.mbkm');
+        $mhsw->givePermissionTo('mhsw.*');
 
         $dosen = Role::create(['name' => 'dosen']);
-        $dosen->givePermissionTo('dosen');
+        $dosen->givePermissionTo('dosen.*');
 
         $dosen = Role::create(['name' => 'pembimbing']);
-        $dosen->givePermissionTo('dosen');
+        $dosen->givePermissionTo('pembimbing.*');
+
+        $admin = Role::create(['name' => 'Super Admin']);
 
     }
 }

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('lokasi_mbkm');
             $table->string('alamat_mbkm');
             $table->string('deskripsi_mbkm')->nullable();
+            $table->boolean('approved')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

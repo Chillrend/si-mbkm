@@ -66,12 +66,14 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            @can('mhsw.mbkm')
             <x-responsive-nav-link :href="route('mbkm.dashboard')" :active="request()->routeIs('mbkm.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('mbkm.daftar')" :active="request()->routeIs('mbkm.daftar')">
                 {{ __('Daftar Kegiatan MBKM') }}
             </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
