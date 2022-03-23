@@ -63,10 +63,9 @@ class MahasiswaMBKMController extends Controller
 
     public function approve(Request $request){
         $mhsw_mbkm = MahasiswaMbkm::where('id', $request->post('id'))->first();
-        $mhsw_mbkm->setApproved($request->get('approve'));
-        dd($mhsw_mbkm);
-
-        return redirect()->back()->with('success', 'Pengajuan MBKM ini telah berhasil disetujui');
+        $approved = !($request->get('approve') === null);
+        $mhsw_mbkm->setApproved($approved);
+        return redirect()->back()->with('success', $mhsw_mbkm->approved ? "Pengajuan MBKM ini telah disetujui" : "Persetujuan MBKM ini telah dibatalkan");
     }
 
     public function store(Request $request){
@@ -80,7 +79,8 @@ class MahasiswaMBKMController extends Controller
             'nama_dospem' => 'string|required',
             'lokasi_mbkm' => 'string|required',
             'alamat_mbkm' => 'string|required',
-            'deskripsi_mbkm' => 'string'
+            'deskripsi_mbkm' => 'string',
+            'program_dikbud' => 'boolean'
 
         ]);
 
@@ -95,7 +95,7 @@ class MahasiswaMBKMController extends Controller
             $mhsw_mbkm->fill($data);
         }
         $mhsw_mbkm->save();
-        return redirect()->to('/mbkm')->with('success', true);
+        return redirect()->to('/mbkm');
     }
 
     public static function getAllProdiWithinJurusan(int $jurusan_id){

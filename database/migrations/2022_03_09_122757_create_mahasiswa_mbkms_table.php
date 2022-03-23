@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('alamat_mbkm');
             $table->string('deskripsi_mbkm')->nullable();
             $table->boolean('approved')->default(false);
+            $table->boolean('program_dikbud')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

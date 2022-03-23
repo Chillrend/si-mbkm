@@ -65,7 +65,7 @@
                                                         title="required">*</abbr></label>
                                                 <input placeholder="e.g 2017"
                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                       required="required" type="number" maxlength="4" min="2017" id="angkatan" name="angkatan" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->angkatan}}@endif">
+                                                       required="required" type="number" maxlength="4" min="2017" id="angkatan" name="angkatan" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->angkatan}}@else{{old('angkatan')}}@endif">
                                                 @error('angkatan')
                                                 <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
@@ -75,7 +75,7 @@
                                                         title="required">*</abbr></label>
                                                 <input placeholder="e.g 6"
                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                       required="required" type="number" min="1" max="8" id="semester" name="semester" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->semester}}@endif">
+                                                       required="required" type="number" min="1" max="8" id="semester" name="semester" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->semester}}@else{{old('semester')}}@endif">
                                                 @error('semester')
                                                 <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
@@ -101,7 +101,7 @@
                                                         title="required">*</abbr></label>
                                                 <input placeholder="e.g 6"
                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                       required="required" type="number" min="1" max="6" id="durasi" name="durasi" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->durasi}}@endif">
+                                                       required="required" type="number" min="1" max="6" id="durasi" name="durasi" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->durasi}}@else{{old('durasi')}}@endif">
                                                 @error('durasi')
                                                 <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
@@ -113,7 +113,7 @@
                                                     Yang Akan Diajukan <abbr title="required">*</abbr></label>
                                                 <input placeholder="NIP Dospem"
                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                       required="required" type="number" name="nip_dospem" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->nip_dospem}}@endif"
+                                                       required="required" type="number" name="nip_dospem" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->nip_dospem}}@else{{old('nip_dospem')}}@endif"
                                                        id="nip_dospem">
                                                 @error('nip_dospem')
                                                 <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
@@ -124,7 +124,7 @@
                                                     Yang Akan Diajukan <abbr title="required">*</abbr></label>
                                                 <input placeholder="Nama Dospem"
                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                       required="required" type="text" name="nama_dospem" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->nama_dospem}}@else {{old('nama_dospem')}}@endif"
+                                                       required="required" type="text" name="nama_dospem" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->nama_dospem}}@else{{old('nama_dospem')}}@endif"
                                                        id="nama_dospem">
                                                 @error('nama_dospem')
                                                 <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
@@ -137,7 +137,7 @@
                                             <input
                                                 placeholder="Tempat Kegiatan MBKM (e.g Desa Harapan Jaya, PT. XYZ, Kantor PMI Cabang Depok)"
                                                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                required="required" type="text" name="lokasi_mbkm" id="lokasi_mbkm" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->lokasi_mbkm}}@endif">
+                                                required="required" type="text" name="lokasi_mbkm" id="lokasi_mbkm" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->lokasi_mbkm}}@else{{old('lokasi_mbkm')}}@endif">
                                             @error('lokasi_mbkm')
                                             <p class="text-sm text-red-500 hidden mt-3">{{ $message }}</p>
                                             @enderror
@@ -148,7 +148,7 @@
                                             <input
                                                 placeholder="Alamat Lokasi Kegiatan MBKM (e.g Jl. DR. GA Siwabessy No. 18...)"
                                                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                required="required" type="text" name="alamat_mbkm" id="alamat_mbkm" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->alamat_mbkm}}@endif">
+                                                required="required" type="text" name="alamat_mbkm" id="alamat_mbkm" value="@if($mhsw_mbkm_exist){{$mhsw_mbkm->alamat_mbkm}}@else{{old('alamat_mbkm')}}@endif">
                                             @error('alamat_mbkm')
                                             <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                             @enderror
@@ -159,7 +159,14 @@
                                             <textarea name="deskripsi_mbkm" id="deskripsi_mbkm"
                                                       class="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
                                                       placeholder="Ketik detail kegiatan yang akan dilakukan pada saat kegiatan MBKM (e.g Mengajar pelajaran xyz di SMKN 1 Kota XYZ..)"
-                                                      spellcheck="false">@if($mhsw_mbkm_exist){{$mhsw_mbkm->deskripsi_mbkm}}@endif</textarea>
+                                                      spellcheck="false">@if($mhsw_mbkm_exist){{$mhsw_mbkm->deskripsi_mbkm}}@else{{old('deskripsi_mbkm')}}@endif</textarea>
+                                            @error('deskripsi_mbkm')
+                                            <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="flex-auto w-full my-3 text-xs space-y-2">
+                                            <input id="program_dikbud" type="checkbox" name="program_dikbud" value="1">
+                                            <label for="program_dikbud" class="ml-2 font-semibold text-gray-600">Centang Jika Anda mengikuti program MBKM dari Kemendikbudristek</label>
                                             @error('deskripsi_mbkm')
                                             <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                             @enderror

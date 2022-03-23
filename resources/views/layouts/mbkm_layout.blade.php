@@ -232,6 +232,14 @@
                     </div>
                     <div class="relative w-full mb-3">
                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            Program Dikbud
+                        </label>
+                        <input disabled type="text"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               value="{{$mhsw_mbkm->program_dikbud ? "Ya" : "Bukan Program Kemendikbud"}}">
+                    </div>
+                    <div class="relative w-full mb-3">
+                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                             Sharable URL
                         </label>
                         <a class="block border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -255,14 +263,14 @@
                     </h6>
                     <div class="w-full lg:w-12/12 px-4">
                         <div class="relative w-full mb-3">
-                            <form method="post" url="{{url("/mbkm/approve/")}}">
+                            <form method="post" action="{{url("/mbkm/approve")}}">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$mhsw_mbkm->id}}">
                                 @if(!$mhsw_mbkm->approved && $mhsw_mbkm->nip_dospem === \Illuminate\Support\Facades\Auth::user()->ident)
                                     <input type="hidden" name="approve" value="true">
                                     <x-button type="submit" class="ml-0">Setujui Pengajuan MBKM Mahasiswa</x-button>
                                 @elseif($mhsw_mbkm->approved && $mhsw_mbkm->nip_dospem === \Illuminate\Support\Facades\Auth::user()->ident)
-                                    <input type="hidden" name="approve" value="false">
+                                    <input type="hidden" name="approve" value="">
                                     <x-button class="ml-0">Batalkan Persetujuan MBKM Mahasiswa</x-button>
                                 @endif
                             </form>

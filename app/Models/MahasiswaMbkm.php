@@ -30,7 +30,8 @@ class MahasiswaMbkm extends Model
         'lokasi_mbkm',
         'alamat_mbkm',
         'deskripsi_mbkm',
-        'approved'
+        'approved',
+        'program_dikbud'
     ];
 
     public function getProdi(){
