@@ -232,6 +232,14 @@
                     </div>
                     <div class="relative w-full mb-3">
                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            Nama Pembimbing Industri
+                        </label>
+                        <input disabled type="text"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               value="{{$mhsw_mbkm->pembimbing_mbkm_id === null ? "Belum Didaftarkan" : $mhsw_mbkm->getPembimbing()->first()->name}}">
+                    </div>
+                    <div class="relative w-full mb-3">
+                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                             Program Dikbud
                         </label>
                         <input disabled type="text"
@@ -262,19 +270,25 @@
                         Pengaturan Untuk Dosen Pembimbing / Program Studi / Pembimbing Industri
                     </h6>
                     <div class="w-full lg:w-12/12 px-4">
-                        <div class="relative w-full mb-3">
-                            <form method="post" action="{{url("/mbkm/approve")}}">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$mhsw_mbkm->id}}">
-                                @if(!$mhsw_mbkm->approved && $mhsw_mbkm->nip_dospem === \Illuminate\Support\Facades\Auth::user()->ident)
-                                    <input type="hidden" name="approve" value="true">
-                                    <x-button type="submit" class="ml-0">Setujui Pengajuan MBKM Mahasiswa</x-button>
-                                @elseif($mhsw_mbkm->approved && $mhsw_mbkm->nip_dospem === \Illuminate\Support\Facades\Auth::user()->ident)
-                                    <input type="hidden" name="approve" value="">
-                                    <x-button class="ml-0">Batalkan Persetujuan MBKM Mahasiswa</x-button>
-                                @endif
-                            </form>
-                        </div>
+                        @can(['dosen.*'])
+                            <div class="relative w-full mb-3">
+                                <form method="post" action="{{url("/mbkm/approve")}}">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$mhsw_mbkm->id}}">
+                                    @if(!$mhsw_mbkm->approved && $mhsw_mbkm->nip_dospem === \Illuminate\Support\Facades\Auth::user()->ident)
+                                        <input type="hidden" name="approve" value="true">
+                                        <x-button type="submit" class="ml-0">Setujui Pengajuan MBKM Mahasiswa</x-button>
+                                    @elseif($mhsw_mbkm->approved && $mhsw_mbkm->nip_dospem === \Illuminate\Support\Facades\Auth::user()->ident)
+                                        <input type="hidden" name="approve" value="">
+                                        <x-button type="submit" class="ml-0">Batalkan Persetujuan MBKM Mahasiswa
+                                        </x-button>
+                                    @endif
+                                </form>
+                            </div>
+                        @endcan
+                        @can('dosen.create_pembimbing_user')
+                            @include('layouts.modal_register')
+                        @endcan
                     </div>
                 @endcan
             </div>

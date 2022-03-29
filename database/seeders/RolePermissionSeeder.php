@@ -33,8 +33,8 @@ class RolePermissionSeeder extends Seeder
         $dosen = Role::create(['name' => 'dosen']);
         $dosen->givePermissionTo('dosen.*');
 
-        $dosen = Role::create(['name' => 'pembimbing']);
-        $dosen->givePermissionTo('pembimbing.*');
+        $pembimbing = Role::create(['name' => 'pembimbing']);
+        $pembimbing->givePermissionTo('pembimbing.*');
 
         $admin = Role::create(['name' => 'Super Admin']);
 

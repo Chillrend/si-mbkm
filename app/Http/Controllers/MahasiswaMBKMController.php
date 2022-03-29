@@ -6,8 +6,10 @@ use App\Models\Jurusan;
 use App\Models\MahasiswaMbkm;
 use App\Models\ModelMbkm;
 use App\Models\Prodi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\Input;
 
@@ -64,8 +66,45 @@ class MahasiswaMBKMController extends Controller
     public function approve(Request $request){
         $mhsw_mbkm = MahasiswaMbkm::where('id', $request->post('id'))->first();
         $approved = !($request->get('approve') === null);
-        $mhsw_mbkm->setApproved($approved);
+        if($approved){
+            $mhsw_mbkm->setApproved(true, Auth::user()->id);
+        }else{
+            $mhsw_mbkm->setApproved(false);
+        }
+        $mhsw_mbkm->setApproved($approved, Auth::user()->id);
         return redirect()->back()->with('success', $mhsw_mbkm->approved ? "Pengajuan MBKM ini telah disetujui" : "Persetujuan MBKM ini telah dibatalkan");
+    }
+
+    public function create_pembimbing(Request $request){
+        Auth::user()->can(['dosen.create_pembimbing_user']);
+        $request->validate([
+            'email' => 'email|required',
+            'mbkm_id' => 'required'
+        ]);
+
+        $pembimbing_user = User::where('email', $request->get('email'))->first();
+        $mhsw_mbkm = MahasiswaMbkm::where('id', $request->get('mbkm_id'))->first();
+
+        if($pembimbing_user){
+            $mhsw_mbkm->pembimbing_mbkm_id = $pembimbing_user->id;
+            $mhsw_mbkm->save();
+        }else{
+            $request->validate([
+                'name' => 'required|string',
+                'password' => 'required|string|min:8'
+            ]);
+            $pembimbing_user = new User();
+
+            $pembimbing_user->fill($request->all());
+            $pembimbing_user->password = Hash::make($request->get('password'));
+            $pembimbing_user->assignRole('pembimbing');
+            $pembimbing_user->save();
+
+            $mhsw_mbkm->pembimbing_mbkm_id = $pembimbing_user->id;
+            $mhsw_mbkm->save();
+        }
+
+        return redirect()->back()->with('success', 'Pembimbing telah didaftarkan dan/atau dikaitkan ke MBKM ini!');
     }
 
     public function store(Request $request){
@@ -81,7 +120,6 @@ class MahasiswaMBKMController extends Controller
             'alamat_mbkm' => 'string|required',
             'deskripsi_mbkm' => 'string',
             'program_dikbud' => 'boolean'
-
         ]);
 
         $mhsw_mbkm = MahasiswaMbkm::where('user_id', Auth::user()->id)->first();

@@ -54,8 +54,9 @@ class MahasiswaMbkm extends Model
         return $this->belongsTo(User::class, 'pembimbing_mbkm_id');
     }
 
-    public function setApproved(bool $boolean = true){
+    public function setApproved(bool $boolean = true, int $dosbingId = null){
         $this->approved = $boolean;
+        $this->dosbing_mbkm_id = $dosbingId;
         $this->save();
     }
 }
