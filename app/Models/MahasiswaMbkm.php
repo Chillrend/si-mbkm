@@ -54,6 +54,10 @@ class MahasiswaMbkm extends Model
         return $this->belongsTo(User::class, 'pembimbing_mbkm_id');
     }
 
+    public function getAllLogs(){
+        return $this->hasMany(LogBook::class, 'mahasiswa_mbkm_id');
+    }
+
     public function setApproved(bool $boolean = true, int $dosbingId = null){
         $this->approved = $boolean;
         $this->dosbing_mbkm_id = $dosbingId;
