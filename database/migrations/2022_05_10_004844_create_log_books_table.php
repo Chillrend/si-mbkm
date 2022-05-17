@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('log_books', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('mahasiswa_mbkm_id');
-            $table->date('tanggal_log');
+            $table->uuid('mahasiswa_mbkm_id');
+            $table->dateTimeTz('tanggal_log');
             $table->string('tempat');
             $table->string('uraian');
             $table->string('rencana_pencapaian');
