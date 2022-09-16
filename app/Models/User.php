@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function getMhsJurusan(){
         return $this->belongsTo(Jurusan::class, 'jurusan_id');
     }
+
+    public function getMahasiswaMbkm(){
+        return $this->hasOne(MahasiswaMbkm::class, 'user_id');
+    }
 }

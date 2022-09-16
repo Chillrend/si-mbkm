@@ -9,7 +9,7 @@ class LogBook extends Model
 {
     use HasFactory;
 
-    protected $table = 'logbooks';
+    protected $table = 'log_books';
 
     protected $casts = [
         'mahasiswa_mbkm_id' => 'string'

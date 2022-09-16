@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaMBKMController;
+use App\Http\Controllers\LogBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/mbkm/daftar', [MahasiswaMBKMController::class, 'store'])->name('mbkm.store');
     Route::post('/mbkm/approve', [MahasiswaMBKMController::class, 'approve'])->name('mbkm.approve');
     Route::post('/mbkm/create_pembimbing', [MahasiswaMBKMController::class, 'create_pembimbing'])->name('mbkm.create_pembimbing');
+});
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/logbook', [LogBookController::class, 'render'])->name('logbook.render');
+    Route::get('/logbook/form', [LogBookController::class, 'render_form'])->name('logbook.form');
+    Route::post('/logbook/form', [LogBookController::class, 'store'])->name('logbook.form');
 });
 
 Route::get('/mbkm/noreg/{id}', [MahasiswaMBKMController::class, 'render_noreg'])->name('mbkm.noreg');
