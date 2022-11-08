@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('log_books', function (Blueprint $table) {
             $table->id();
             $table->uuid('mahasiswa_mbkm_id');
-            $table->dateTimeTz('tanggal_log');
+            $table->date('tanggal_log');
             $table->string('tempat');
-            $table->string('uraian');
-            $table->string('rencana_pencapaian');
+            $table->text('uraian');
+            $table->text('rencana_pencapaian');
             $table->boolean('approved_by_dosen')->default(false);
             $table->boolean('approved_by_pembimbing')->default(false);
             $table->timestamps();

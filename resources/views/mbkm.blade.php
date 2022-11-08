@@ -6,8 +6,8 @@
     </x-slot>
 
     <aside class="h-screen fixed top-0">
-        <h1 class="text-xl">TEST FLOAT</h1>
     </aside>
+
 
     @if($mhsw_mbkm_exist)
     @include('layouts.mbkm_layout')

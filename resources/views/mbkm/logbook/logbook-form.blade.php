@@ -1,3 +1,25 @@
+<style>
+.card {
+    width: 25%;
+}
+.head1{
+    background: red;
+}
+
+.container1 {
+    padding: 2px 8px ;
+    border: 1px ridge red;
+}
+
+.head2{
+    background: rgb(4, 243, 44);
+}
+
+.container2 {
+    padding: 2px 8px ;
+    border: 1px ridge rgb(4, 243, 44);
+}
+</style>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -10,6 +32,25 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1 class="text-xl">Form LogBook Mahasiswa</h1>
+                    @if ($message = Session::get('success'))
+                                        <div class="card">
+                                            <div class="head2">
+                                            <h4><b>Succes</b></h4>
+                                            </div>
+                                            <div class="container2">
+                                            <strong >{{ $message }}</strong>
+                                            </div>
+                                        </div>
+                                        @elseif ($message = Session::get('error'))
+                                        <div class="card">
+                                            <div class="head1">
+                                            <h4><b>WARNING !</b></h4>
+                                            </div>
+                                            <div class="container1">
+                                            <strong >{{ $message }}</strong>
+                                            </div>
+                                        </div>
+                    @endif
                     <div class="grid  gap-8 grid-cols-1">
                         <div class="flex flex-col">
                             <div class="mt-5">
@@ -22,7 +63,7 @@
                                                         title="required">*</abbr></label>
                                                 <input placeholder="Tanggal Bimbingan"
                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                       required="required" type="datetime-local" id="tanggal_log" name="tanggal_log" value="">
+                                                       required="required" type="date" id="tanggal_log" name="tanggal_log" value="">
                                                 @error('tanggal_log')
                                                 <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                                 @enderror
@@ -43,7 +84,8 @@
                                             <textarea name="uraian" id="uraian"
                                                       class="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
                                                       placeholder="Detail kegiatan yang dilakukan pada saat bimbingan"
-                                                      spellcheck="false"></textarea>
+                                                      spellcheck="false"
+                                                      ></textarea>
                                             @error('uraian')
                                             <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                             @enderror
@@ -53,7 +95,9 @@
                                             <textarea name="rencana_pencapaian" id="rencana_pencapaian"
                                                       class="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
                                                       placeholder="Detail target pencapaian yang akan dipenuhi setelah bimbingan"
-                                                      spellcheck="false"></textarea>
+                                                      spellcheck="false"
+                                                      
+                                                      ></textarea>
                                             @error('rencana_pencapaian')
                                             <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
                                             @enderror
